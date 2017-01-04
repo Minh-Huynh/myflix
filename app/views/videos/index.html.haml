@@ -1,0 +1,11 @@
+
+-@categories.each do |category|
+  %article.video_category
+    %header
+      %a{:href => "#"} #{category.title}
+    .videos.row
+      - category.videos.each do |video|
+        .video.col-sm-2
+          %a{:href => "#"}
+          %img{:src => "#{video.small_cover_url}"}
+        
