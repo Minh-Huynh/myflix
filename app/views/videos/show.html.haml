@@ -6,6 +6,38 @@
       .video_info.col-sm-3
         %header
           %h3 #{@video.title}
-          %span Rating: ??/5.0
+          %span Rating: #{@video.average_review_score || '0.0'} /5.0
         %p
           #{@video.description}
+        -if current_user.queue_items.where(video_id: @video.id).empty?
+          = button_to '+ My Queue', my_queue_create_path(queue_item: {video_id: @video.id, user_id: current_user.id, rank: current_user.reviews.count + 1}), class: 'btn btn-default', method: 'post'
+
+%section.reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = form_for [@video, @review] do |t|
+        %fieldset
+          .form-group
+            %label Rate this video
+            .row
+              .col-sm-3
+                =t.select(:score, [['5 stars', 5], ['4 stars', 4], ['3 stars', 3], ['2 stars', 2], ['1 star', 1]], {}, {:class => 'form-control'})
+          .form-group
+            %label Write Review
+            .row
+              .col-sm-8
+                =t.text_area(:comment,{:rows => '6', :class => 'form-control'})
+        %fieldset.form-group.actions.clearfix
+          =t.submit 'Submit', :class => 'btn'
+          =link_to "Cancel", @video
+      %header
+        %h3 User Reviews (#{@video.reviews.count})
+      %ul
+        -@video.reviews.each do |review|
+          %article.review
+            %li.row
+              .col-sm-2
+                %span Rating: #{review.score} / 5
+                %p by <a href= #{user_path(review.user)}>#{review.user.full_name}</a>
+              .col-sm-8
+                %p #{review.comment}

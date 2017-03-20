@@ -2,10 +2,10 @@
 -@categories.each do |category|
   %article.video_category
     %header
-      %a{:href => "#"} #{category.title}
+      %h2 #{category.title}
     .videos.row
-      - category.videos.each do |video|
+      - category.recent_videos.each do |video|
         .video.col-sm-2
-          %a{:href => "#"}
-          %img{:src => "#{video.small_cover_url}"}
+          %a{:href => "#{video_path(video.id)}", id: "video_#{video.id}_link"}
+            %img{src: "#{video.small_cover_url}", id: "video_#{video.id}"}
         
