@@ -29,3 +29,4 @@ Myflix::Application.configure do
     authentication:       'plain',
   }
   ActionMailer::Base.delivery_method = :smtp
+ end
