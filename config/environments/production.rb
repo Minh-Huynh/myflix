@@ -21,7 +21,7 @@ Myflix::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'ENV['MAILGUN_SMTP_SERVER'],
+    address:              ENV['MAILGUN_SMTP_SERVER'],
     port:                 ENV['MAILGUN_SMTP_PORT'],
     domain:               'morning-castle-51455.herokuapp.com',
     user_name:            ENV['MAILGUN_SMTP_LOGIN'],
