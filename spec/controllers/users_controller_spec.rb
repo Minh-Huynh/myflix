@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+
   describe "GET new" do
     it "sets @user" do
       get :new
@@ -24,13 +25,24 @@ describe UsersController do
       post :create, user: {email: Faker::Internet.email, password: "password"}
       expect(response).to  render_template(:new)
     end
+    context "email sending" do
+      it "sends out the email" do
+        post :create, user: {email: Faker::Internet.email, password: "password"}
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+      it "sends to the right receipient" do
+        user_email = {full_name: Faker::Name.name, email: Faker::Internet.email, password: "password"}
+        post :create, user: user_email 
+        expect(ActionMailer::Base.deliveries.last.to.last).to eq(user_email[:email]) 
+      end
+    end
   end
   describe "GET show" do
     it "sets @user" do
       set_current_user
       user = Fabricate(:user)
       get :show, id: user.id
-      expect(assigns(:user)).to eq(User.first)
+      expect(assigns(:user)).to eq(User.last)
     end
   end
 end

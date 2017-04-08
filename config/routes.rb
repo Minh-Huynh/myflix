@@ -19,8 +19,18 @@ Myflix::Application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   post 'login', to: 'sessions#create'
 
+  get 'forgot_password', to: 'forgot_passwords#new'
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token',to: 'password_resets#expired_token'
+
   get 'my_queue', to:'queue_items#index'
   post 'my_queue/update', to: 'queue_items#update'
   post 'my_queue/create', to: 'queue_items#create'
   post 'my_queue/destroy/:id', to: 'queue_items#destroy', as: 'my_queue_destroy'
+
+  resources :invitations, only:[:new, :create]
+  get 'invitation_confirmation', to: 'invitations#confirm'
+  resources :registrations, only: [:show, :create]
 end
