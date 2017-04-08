@@ -18,8 +18,8 @@ Myflix::Application.configure do
 
   config.active_support.deprecation = :notify
 
-
   config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
     address:              ENV['MAILGUN_SMTP_SERVER'],
     port:                 ENV['MAILGUN_SMTP_PORT'],
@@ -28,5 +28,4 @@ Myflix::Application.configure do
     password:             ENV['MAILGUN_SMTP_PASSWORD'],
     authentication:       'plain',
   }
-  ActionMailer::Base.delivery_method = :smtp
  end
