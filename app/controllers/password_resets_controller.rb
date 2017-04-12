@@ -6,7 +6,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find_by(reset_token: params[:reset_token]) || User.find(params[:user_id])
     if user
       user.password = params[:password]
       user.generate_reset_token
