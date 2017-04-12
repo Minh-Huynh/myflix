@@ -47,29 +47,28 @@ feature "signing in" do
   end
 end
 
-def add_video_to_queue_from_video_index(video_id)
-  click_link("video_#{video_id}_link")
-  click_button("+ My Queue")
-  return_to_video_index
-end
+  def add_video_to_queue_from_video_index(video_id)
+    click_link("video_#{video_id}_link")
+    click_button("+ My Queue")
+    return_to_video_index
+  end
 
-def return_to_video_index
-  click_link("MyFLiX")
-end
+  def return_to_video_index
+    click_link("MyFLiX")
+  end
 
-def have_video_image(video_id)
-  have_css("img#video_#{video_id}")
-end
+  def have_video_image(video_id)
+    have_css("img#video_#{video_id}")
+  end
 
-def expect_to_be_on_video_page(page, video_id)
-  expect(page).to have_content("Rating")
-  expect(current_path).to eq("/videos/#{video_id}")
-end
+  def expect_to_be_on_video_page(page, video)
+    expect(page).to have_content("Rating")
+    expect(current_path).to eq("/videos/#{video.id}")
+  end
 
-def expect_to_be_on_my_queue(new_video)
-  expect(current_path).to eq("/my_queue")
-  expect(page).to have_content("#{new_video.title}")
-end
-
+  def expect_to_be_on_my_queue(new_video)
+    expect(current_path).to eq("/my_queue")
+    expect(page).to have_content("#{new_video.title}")
+  end
 
 
