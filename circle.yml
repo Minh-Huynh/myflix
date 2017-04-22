@@ -7,15 +7,15 @@ deployment:
   production:
     branch: master
     commands:
-      - heroku maintenance:on --app myflix 
-      - heroku pg:backups capture --app myflix 
-      - git push git@heroku.com: myflix.git $CIRCLE_SHA1:refs/heads/master
-      - heroku run rake db:migrate --app myflix 
-      - heroku maintenance:off --app myflix 
+      - heroku maintenance:on --app morning-castle-51455 
+      - heroku pg:backups capture --app morning-castle-51455 
+      - git push git@heroku.com: morning-castle-51455.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app morning-castle-51455 
+      - heroku maintenance:off --app morning-castle-51455 
   staging:
     branch: staging
     commands:
-      - heroku maintenance:on --app myflix 
-      - git push git@heroku.com: myflix.git $CIRCLE_SHA1:refs/heads/master
-      - heroku run rake db:migrate --app myflix 
-      - heroku maintenance:off --app myflix 
+      - heroku maintenance:on --app morning-castle-51455 
+      - git push git@heroku.com: morning-castle-51455.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app morning-castle-51455
+      - heroku maintenance:off --app morning-castle-51455 
