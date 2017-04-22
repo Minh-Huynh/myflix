@@ -1,6 +1,6 @@
 machine:
   services:
-    -redis
+    - redis
   ruby:
     version: 2.1.2
 deployment:
