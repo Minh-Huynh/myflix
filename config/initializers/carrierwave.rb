@@ -8,9 +8,8 @@ CarrierWave.configure do |config|
     CarrierWave.configure do |config|
       config.storage = :file
     end
-  end
   # Use AWS storage if in production
-  if Rails.env.production? || Rails.env.staging?
+    elsif Rails.env.production? || Rails.env.staging?
     CarrierWave.configure do |config|
       config.storage = :aws
       config.aws_bucket = ENV.fetch('S3_BUCKET_NAME')
