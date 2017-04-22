@@ -1,0 +1,24 @@
+%section.admin_add_video
+  .container
+    .row
+      .span.offset1
+        = form_for [:admin, @video], class: "form-horizontal" do |f|
+          %ul.nav.nav-tabs
+            %li
+              %a(href="") Recent Payments
+              %li.active 
+                %a(href="") Add a New Video
+          %fieldset
+            .form-group
+              = f.label :title
+              = f.text_field :title, class: "span3"
+            .form-group
+              = f.label :category_id
+              = f.select :category_id, options_for_select(Category.all.map {|category| [category.title, category.id]})
+            .form-group.align-middle
+              = f.label :description
+              = f.text_area :description, rows: 8, class: "span6"
+          .form-group
+            = f.label :cover
+            = f.file_field :cover
+          = f.submit "Create Video"    

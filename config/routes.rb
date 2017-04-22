@@ -13,6 +13,9 @@ Myflix::Application.routes.draw do
   resources :follows, only: [:index,:create,:destroy]
 
   resources :users, except: :destroy
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
 
   get 'home', to:'videos#index'
   get 'login', to: 'sessions#new', as: 'login'
